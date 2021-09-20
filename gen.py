@@ -27,12 +27,12 @@ INSTANCE_PER_IMAGE = 1 # no. of times to use the same image
 SECS_PER_IMG = 5 #max time per image in seconds
 
 # path to the data-file, containing image, depth and segmentation:
-DATA_PATH = 'data'
+DATA_PATH = 'C:/Users/jingj/Documents/GitHub/SynthText/data'
 DB_FNAME = osp.join(DATA_PATH,'dset.h5')
 # url of the data (google-drive public file):
-#DATA_URL = 'http://www.robots.ox.ac.uk/~ankush/data.tar.gz'
+DATA_URL = 'http://www.robots.ox.ac.uk/~ankush/data.tar.gz'
 
-DATA_URL = 'https://drive.google.com/file/d/0B6vslVxoQlvIZXZqYWFSc0htMVU/view?resourcekey=0-A_xPKDrp06ewxp9827zJsg'
+#DATA_URL = 'https://drive.google.com/file/d/0B6vslVxoQlvIZXZqYWFSc0htMVU/view?resourcekey=0-A_xPKDrp06ewxp9827zJsg'
 OUT_FILE = 'results/SynthText.h5'
 
 def get_data():

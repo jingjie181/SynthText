@@ -30,7 +30,8 @@ SECS_PER_IMG = 5 #max time per image in seconds
 DATA_PATH = 'data'
 DB_FNAME = osp.join(DATA_PATH,'dset.h5')
 # url of the data (google-drive public file):
-DATA_URL = 'http://www.robots.ox.ac.uk/~ankush/data.tar.gz'
+# DATA_URL = 'http://www.robots.ox.ac.uk/~ankush/data.tar.gz'
+DATA_URL = 'https://drive.google.com/open?id=0B6vslVxoQlvIZXZqYWFSc0htMVU'
 OUT_FILE = 'results/SynthText.h5'
 
 def get_data():
@@ -52,7 +53,7 @@ def get_data():
       colorprint(Color.BLUE,'\n\tdata saved at:'+DB_FNAME,bold=True)
       sys.stdout.flush()
     except:
-      print colorize(Color.RED,'Data not found and have problems downloading.',bold=True)
+      print(colorize(Color.RED,'Data not found and have problems downloading.',bold=True))
       sys.stdout.flush()
       sys.exit(-1)
   # open the h5 file and return:
@@ -75,14 +76,14 @@ def add_res_to_db(imgname,res,db):
 
 def main(viz=False):
   # open databases:
-  print colorize(Color.BLUE,'getting data..',bold=True)
+  print(colorize(Color.BLUE,'getting data..',bold=True))
   db = get_data()
-  print colorize(Color.BLUE,'\t-> done',bold=True)
+  print(colorize(Color.BLUE,'\t-> done',bold=True))
 
   # open the output h5 file:
   out_db = h5py.File(OUT_FILE,'w')
   out_db.create_group('/data')
-  print colorize(Color.GREEN,'Storing the output in: '+OUT_FILE, bold=True)
+  print(colorize(Color.GREEN,'Storing the output in: '+OUT_FILE, bold=True))
 
   # get the names of the image files in the dataset:
   imnames = sorted(db['image'].keys())
@@ -114,7 +115,7 @@ def main(viz=False):
       img = np.array(img.resize(sz,Image.ANTIALIAS))
       seg = np.array(Image.fromarray(seg).resize(sz,Image.NEAREST))
 
-      print colorize(Color.RED,'%d of %d'%(i,end_idx-1), bold=True)
+      print(colorize(Color.RED,'%d of %d'%(i,end_idx-1), bold=True))
       res = RV3.render_text(img,depth,seg,area,label,
                             ninstance=INSTANCE_PER_IMAGE,viz=viz)
       if len(res) > 0:
@@ -126,7 +127,7 @@ def main(viz=False):
           break
     except:
       traceback.print_exc()
-      print colorize(Color.GREEN,'>>>> CONTINUING....', bold=True)
+      print(colorize(Color.GREEN,'>>>> CONTINUING....', bold=True))
       continue
   db.close()
   out_db.close()
